@@ -1,12 +1,12 @@
 import { Button, Text } from '@react-navigation/elements';
-import { FlatList, Modal, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, Modal, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { RootView } from '../../components/RootView';
 import i18next, { languageResources } from '../../services/i18next';
 import { useTranslation } from 'react-i18next';
 import { ThemedText } from '../../components/ThemedText';
 import { useState } from 'react';
 import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
-
+import { LanguageCard } from '../../components/cards/LanguageCard';
 
 export function Home() {
   const [visible, setVisible] = useState(false);
@@ -18,23 +18,33 @@ export function Home() {
     i18next.changeLanguage(language);
     setVisible(false);
   };
+
   return (
     <RootView style={styles.container}>
       <Modal visible={visible} onRequestClose={() => setVisible(true)} animationType="slide">
         <View style={[styles.languageList, { backgroundColor: theme === 'light' ? colors.purpleSoft : colors.purpleRich }]}>
-          <FlatList data={Object.keys(languageResources)} renderItem={({ item }) => (
-            <TouchableOpacity style={styles.languageButton} onPress={() => chgLanguage(item)}>
-              <Text>Nothing</Text>
+          <View style={[styles.languageListHeader, { backgroundColor: theme === 'light' ? colors.purplePastel : colors.purpleDeep }]}>
+            <ThemedText variant='headline2'>{t("selectLanguage")}</ThemedText>
+          </View>
+          <FlatList 
+          data={Object.keys(languageResources)} 
+          numColumns={Platform.OS === 'web' ? 4 : 1}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={styles.languageButton}>
+              <LanguageCard languageName={item} changeMethod={chgLanguage(item)}/>
             </TouchableOpacity>
-          )} />
+          )}
+            keyExtractor={(item) => item}
+          />
         </View>
       </Modal>
-      <Text>{t("key")}</Text>
+      <Text>{t("homeScreen")}</Text>
       <Text>{t("openApp")}</Text>
       <Button screen="Profile" params={{ user: 'jane' }}>
         {t('goProfile')}
       </Button>
       <Button screen="Settings">{t('goSettings')}</Button>
+      <Button onPress={() => setVisible(true)}>{t('changeLanguage')}</Button>
       <ThemedText>{t("description")}</ThemedText>
     </RootView>
   );
@@ -48,11 +58,28 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   languageButton: {
-
+    height: 100,
+    ...Platform.select({
+      default: {
+        flex: 1,
+      },
+      web: {
+        flex: 1/4,
+      },
+    })
   },
   languageList: {
     flex: 1,
     justifyContent: 'center',
-    padding: 10,
+    marginTop: 50,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+  },
+  languageListHeader: {
+    alignItems: 'center',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    height: 50,
+    justifyContent: 'center',
   }
 });

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextProps } from "react-native";
 import { Colors } from "../constants/Colors";
-import { useThemeColors } from "../hooks/useThemeColors";
+import { getThemeColors, useThemeColors } from "../hooks/useThemeColors";
 
 const styles = StyleSheet.create({
     body1: {
@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
     headline: {
         fontSize: 24,
         lineHeight: 32,
+        fontWeight: "bold",
+    },
+    headline2: {
+        fontSize: 20,
+        lineHeight: 26,
         fontWeight: "bold",
     },
     subtitle1: {
@@ -48,7 +53,9 @@ type Props = TextProps & {
 
 export function ThemedText({ variant, color, style, ...rest}: Props) {
     const colors = useThemeColors();
-    return (<Text style={[styles[variant?? 'body3'], style, {color: colors[color ?? 'grayLight']}]} {...rest}/>)
+    const theme = getThemeColors();
+    const colors_used = theme === 'light' ? 'grayDark' : 'grayLight';
+    return (<Text style={[styles[variant?? 'body3'], style, {color: colors[color ?? colors_used]}]} {...rest}/>)
 };
 
 export function CapitalizeFirstLetter(text: string) {
