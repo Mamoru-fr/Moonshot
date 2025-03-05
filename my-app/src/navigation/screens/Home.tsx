@@ -24,7 +24,7 @@ export function Home() {
         <View style={[styles.languageList, { backgroundColor: theme === 'light' ? colors.purpleSoft : colors.purpleRich }]}>
           <FlatList data={Object.keys(languageResources)} renderItem={({ item }) => (
             <TouchableOpacity style={styles.languageButton} onPress={() => chgLanguage(item)}>
-              <Text>{LanguagesList[item].nativeName}</Text>
+              <Text>Nothing</Text>
             </TouchableOpacity>
           )} />
         </View>
