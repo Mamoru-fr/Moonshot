@@ -29,7 +29,7 @@ export function Home() {
           )} />
         </View>
       </Modal>
-      <Text>{t("homeScreen")}</Text>
+      <Text>{t("key")}</Text>
       <Text>{t("openApp")}</Text>
       <Button screen="Profile" params={{ user: 'jane' }}>
         {t('goProfile')}

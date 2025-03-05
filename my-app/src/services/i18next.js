@@ -1,5 +1,4 @@
 import i18next from 'i18next';
-import { initReactI18next } from "react-i18next";
 import en from '../locales/en.json';
 import fr from '../locales/fr.json';
 
@@ -8,16 +7,16 @@ export const languageResources = {
     fr: { translation: fr },
 }
 
-i18next.use(initReactI18next).init({
-    compatibilityJSON: 'v3',
+i18next.init({
     lng: 'en',
-    fallbackLng: 'en',
-    resources: {
-        en: { translation: {
-            key: 'Hello World',
-        }}
-    },
     debug: true,
+    resources: {
+        en: {
+            translation: {
+                key: 'Hello World',
+            }
+        }
+    },
 });
 
 export default i18next;
