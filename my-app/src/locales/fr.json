@@ -1,0 +1,9 @@
+{
+    "description": "Ceci n'est qu'un simple exemple de comment utiliser react-i18next",
+    "goProfile": "Accéder au Profil",
+    "goSettings": "Accéder aux Paramètres",
+    "homeScreen": "Écran Principal",
+    "openApp": "Ouvrez 'src/App.tsx' pour commencer à travailler sur votre application !",
+    "settingsScreen": "Settings Screen",
+    "welcome": "Bienvenue sur React et react-i18next"
+}

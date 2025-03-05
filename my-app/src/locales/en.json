@@ -1,0 +1,9 @@
+{
+    "description": "This is a simple example of how to use react-i18next",
+    "goProfile": "Go to Profile",
+    "goSettings": "Go to Settings",
+    "homeScreen": "Home Screen",
+    "openApp": "Open up 'src/App.tsx' to start working on your app!",
+    "settingsScreen": "Settings Screen",
+    "welcome": "Welcome to React and react-i18next"
+}
