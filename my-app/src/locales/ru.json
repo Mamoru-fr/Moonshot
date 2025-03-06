@@ -1,0 +1,12 @@
+{
+    "changeLanguage": "Изменить язык",
+    "description": "Это простой пример использования react-i18next",
+    "goProfile": "Перейти в профиль",
+    "goSettings": "Перейти в настройки",
+    "homeScreen": "Главный экран",
+    "openApp": "Откройте 'src/App.tsx', чтобы начать работу над вашим приложением!",
+    "selectLanguage": "Выберите язык",
+    "settingsScreen": "Настройки",
+    "settingSectionLanguages": "Языки",
+    "welcome": "Добро пожаловать в React и react-i18next"
+}

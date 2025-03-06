@@ -1,0 +1,12 @@
+{
+    "changeLanguage": "言語を変更",
+    "description": "これはreact-i18nextを使う簡単な例です",
+    "goProfile": "プロフィールに移動",
+    "goSettings": "設定に移動",
+    "homeScreen": "ホーム画面",
+    "openApp": "アプリの作業を開始するには、'src/App.tsx' を開いてください！",
+    "selectLanguage": "言語を選択",
+    "settingsScreen": "設定",
+    "settingSectionLanguages": "言語",
+    "welcome": "Reactとreact-i18nextへようこそ"
+}

@@ -6,6 +6,7 @@
     "homeScreen": "Home Screen",
     "openApp": "Open up 'src/App.tsx' to start working on your app!",
     "selectLanguage": "Select a language",
-    "settingsScreen": "Settings Screen",
+    "settingsScreen": "Settings",
+    "settingSectionLanguages":"Languages",
     "welcome": "Welcome to React and react-i18next"
 }

@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { ThemedText } from '../../components/ThemedText';
 import { useState } from 'react';
 import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
-import { LanguageCard } from '../../components/cards/LanguageCard';
 
 export function Home() {
   const [visible, setVisible] = useState(false);
@@ -21,30 +20,12 @@ export function Home() {
 
   return (
     <RootView style={styles.container}>
-      <Modal visible={visible} onRequestClose={() => setVisible(true)} animationType="slide">
-        <View style={[styles.languageList, { backgroundColor: theme === 'light' ? colors.purpleSoft : colors.purpleRich }]}>
-          <View style={[styles.languageListHeader, { backgroundColor: theme === 'light' ? colors.purplePastel : colors.purpleDeep }]}>
-            <ThemedText variant='headline2'>{t("selectLanguage")}</ThemedText>
-          </View>
-          <FlatList 
-          data={Object.keys(languageResources)} 
-          numColumns={Platform.OS === 'web' ? 4 : 1}
-          renderItem={({ item }) => (
-            <TouchableOpacity style={styles.languageButton}>
-              <LanguageCard languageName={item} changeMethod={chgLanguage(item)}/>
-            </TouchableOpacity>
-          )}
-            keyExtractor={(item) => item}
-          />
-        </View>
-      </Modal>
       <Text>{t("homeScreen")}</Text>
       <Text>{t("openApp")}</Text>
       <Button screen="Profile" params={{ user: 'jane' }}>
         {t('goProfile')}
       </Button>
       <Button screen="Settings">{t('goSettings')}</Button>
-      <Button onPress={() => setVisible(true)}>{t('changeLanguage')}</Button>
       <ThemedText>{t("description")}</ThemedText>
     </RootView>
   );
@@ -58,13 +39,15 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   languageButton: {
-    height: 100,
+    flex: 1,
     ...Platform.select({
-      default: {
-        flex: 1,
-      },
       web: {
-        flex: 1/4,
+        maxWidth: '25%',
+        height: 200,
+      },
+      default: {
+        maxWidth: '50%',
+        height: 100,
       },
     })
   },

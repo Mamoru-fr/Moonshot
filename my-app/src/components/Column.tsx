@@ -11,5 +11,4 @@ export function Column({style, gap, ...rest}: Props) {
 const ColumnStyle = {
     flex: 0,
     flexDirection: 'column',
-    alignItems: 'center',
 } satisfies ViewStyle;

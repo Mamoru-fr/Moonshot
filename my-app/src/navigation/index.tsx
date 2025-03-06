@@ -18,9 +18,9 @@ import { Settings } from './screens/Settings';
 import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
 
-const HomeTabs = createBottomTabNavigator({
+const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
   screens: {
-    Home: {
+    Home: { // Create a screen called Home
       screen: Home,
       options: {
         tabBarIcon: ({ color, size }) => (
@@ -35,7 +35,7 @@ const HomeTabs = createBottomTabNavigator({
         ),
       },
     },
-    Updates: {
+    Updates: { // Create a screen called Updates
       screen: Updates,
       options: {
         tabBarIcon: ({ color, size }) => (
@@ -61,7 +61,7 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
-    Profile: {
+    Profile: { // Create a screen called Profile
       screen: Profile,
       linking: {
         path: ':user(@[a-zA-Z0-9-_]+)',
@@ -73,10 +73,11 @@ const RootStack = createNativeStackNavigator({
         },
       },
     },
-    Settings: {
+    Settings: { // Create a screen called Settings
       screen: Settings,
       options: ({ navigation }) => ({
         presentation: 'modal',
+        animationTypeForReplace: 'push',
         headerRight: () => (
           <HeaderButton onPress={navigation.goBack}>
             <Text>Close</Text>
