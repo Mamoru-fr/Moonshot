@@ -69,6 +69,9 @@ const AuthRootStack = createNativeStackNavigator({
     },
     Profile: { // Create a screen called Profile
       screen: Profile,
+      options: {
+        headerShown: false,
+      },
     },
   Settings: { // Create a screen called Settings
     screen: Settings,
