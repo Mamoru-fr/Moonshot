@@ -1,11 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HeaderButton, Text } from '@react-navigation/elements';
 import {
   createStaticNavigation,
+  NavigationContainer,
   StaticParamList,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
+import useAuth from '../hooks/useAuth';
 
 // Icons
 import bell from '../assets/bell.png';
@@ -17,6 +18,9 @@ import { Profile } from './screens/Profile';
 import { Settings } from './screens/Settings';
 import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
+import { Welcome } from './screens/Welcome';
+import { Login } from './screens/Login';
+import { Signup } from './screens/Signup';
 
 const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
   screens: {
@@ -33,6 +37,7 @@ const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
             }}
           />
         ),
+        headerShown: false,
       },
     },
     Updates: { // Create a screen called Updates
@@ -48,12 +53,13 @@ const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
             }}
           />
         ),
+        headerShown: false,
       },
     },
   },
 });
 
-const RootStack = createNativeStackNavigator({
+const AuthRootStack = createNativeStackNavigator({
   screens: {
     HomeTabs: {
       screen: HomeTabs,
@@ -63,43 +69,54 @@ const RootStack = createNativeStackNavigator({
     },
     Profile: { // Create a screen called Profile
       screen: Profile,
-      linking: {
-        path: ':user(@[a-zA-Z0-9-_]+)',
-        parse: {
-          user: (value) => value.replace(/^@/, ''),
-        },
-        stringify: {
-          user: (value) => `@${value}`,
-        },
-      },
     },
-    Settings: { // Create a screen called Settings
-      screen: Settings,
-      options: ({ navigation }) => ({
-        presentation: 'modal',
-        animationTypeForReplace: 'push',
-        headerRight: () => (
-          <HeaderButton onPress={navigation.goBack}>
-            <Text>Close</Text>
-          </HeaderButton>
-        ),
-      }),
-    },
-    NotFound: {
-      screen: NotFound,
-      options: {
-        title: '404',
-      },
-      linking: {
-        path: '*',
-      },
+  Settings: { // Create a screen called Settings
+    screen: Settings,
+    options: {
+      headerShown: false,
     },
   },
+  NotFound: {
+    screen: NotFound,
+    options: {
+      title: '404',
+    },
+    linking: {
+      path: '*',
+    },
+  },
+},
 });
 
-export const Navigation = createStaticNavigation(RootStack);
+const NoneAuthRootStack = createNativeStackNavigator({
+  screens: {
+    Welcome: {
+      screen: Welcome,
+      options: {
+        headerShown: false,
+      },
+    },
+    Login: {
+      screen: Login,
+      options: {
+        headerShown: false,
+      },
+    },
+    Signup: {
+      screen: Signup,
+      options: {
+        headerShown: false,
+      },
+    },
+  }
+})
 
-type RootStackParamList = StaticParamList<typeof RootStack>;
+const {user} = useAuth();
+
+
+export const Navigation = createStaticNavigation(AuthRootStack);
+
+type RootStackParamList = StaticParamList<typeof AuthRootStack>;
 
 declare global {
   namespace ReactNavigation {

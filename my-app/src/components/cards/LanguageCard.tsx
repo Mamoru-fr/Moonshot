@@ -1,4 +1,4 @@
-import { ImageBackground, Platform, Pressable, StyleSheet, View, ViewStyle } from "react-native";
+import { Image, Pressable, StyleSheet, View, ViewStyle } from "react-native";
 import { getThemeColors, useThemeColors } from "../../hooks/useThemeColors";
 import { Shadows } from "../../constants/Shadows";
 import { ThemedText } from "../ThemedText";
@@ -45,12 +45,11 @@ export function LanguageCard({ style, languageName, onPress }: Props) {
     return (
         <Pressable style={[style, styles.wrapper]} onPress={onPress}>
             <View style={[styles.container]}>
-                <ImageBackground source={image} resizeMode='stretch' style={styles.image}>
-                    <View style={[styles.shadow, { shadowColor: theme === 'light' ? colors.grayDark : colors.grayLight }]} />
-                    <ThemedText variant='body1' color={theme === 'light' ? 'grayDark' : 'grayLight'} style={styles.text}>
-                        {(LanguageList as LanguageListType)[languageName].nativeName}
-                    </ThemedText>
-                </ImageBackground>
+                <Image source={image} style={styles.image}/>
+                <View style={[styles.shadow, { shadowColor: theme === 'light' ? colors.grayDark : colors.grayLight }]} />
+                <ThemedText variant='body1' color={theme === 'light' ? 'grayLight' : 'grayDark'} style={styles.text}>
+                    {(LanguageList as LanguageListType)[languageName].nativeName}
+                </ThemedText>
             </View>
         </Pressable>
     );
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         flex: 1,
+        zIndex: -1,
     },
     shadow: {
         position: 'absolute',
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         right: 0,
         height: '40%',
         borderRadius: 7,
-        zIndex: -1,
+        zIndex: 1,
     },
     text: {
         textAlign: 'center',

@@ -1,5 +1,5 @@
 import { Button, Text } from '@react-navigation/elements';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { RootView } from '../../components/RootView';
 import { useTranslation } from 'react-i18next';
 import { ThemedText } from '../../components/ThemedText';
@@ -13,7 +13,7 @@ export function Home() {
     <RootView style={styles.container}>
       <Text>{t("homeScreen")}</Text>
       <Text>{t("openApp")}</Text>
-      <Button screen="Profile" params={{ user: 'jane' }}>
+      <Button screen="Profile">
         {t('goProfile')}
       </Button>
       <Button screen="Settings">{t('goSettings')}</Button>

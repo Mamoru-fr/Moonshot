@@ -1,4 +1,4 @@
-import { FlatList, Image, Modal, Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Modal, Platform, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTranslation } from "react-i18next";
 import { useState } from 'react';
 import i18next from 'i18next';
@@ -12,18 +12,26 @@ import { Row } from '../../components/Row';
 
 // import logos
 import languageLogo from '../../assets/language.png';
+import backArrowAndroid from '../../assets/backArrowAndroid.png'
+import backArrowIOS from '../../assets/backArrowIOS.png'
+import backArrowWeb from '../../assets/backArrowWeb.png'
 import { Button } from '../../components/Button';
+import { useNavigation } from '@react-navigation/native';
 
 export function Settings() {
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   const theme = getThemeColors();
   const colors = useThemeColors();
+  const navigation = useNavigation();
 
   const chgLanguage = (language: string) => {
     i18next.changeLanguage(language);
     setVisible(false);
   };
+
+  const backArrow = Platform.OS === 'ios' ? backArrowIOS : Platform.OS === 'android' ? backArrowAndroid : backArrowWeb; 
+
   return (
     <RootView style={styles.wrapper}>
       <Modal visible={visible} onRequestClose={() => setVisible(true)} animationType="slide">
@@ -43,11 +51,17 @@ export function Settings() {
           />
         </View>
       </Modal>
-      <Column style={styles.container}>
+      <Row style={[styles.headerRow, {}]}>
+        <Pressable onPress={navigation.goBack}>
+          <Image source={backArrow}/>
+        </Pressable>
         <View style={styles.header}>
           <Image source={require('../../assets/gear.png')} style={styles.settingsLogo} />
           <ThemedText variant='headline2'>{t('settingsScreen')}</ThemedText>
         </View>
+        <View style={{width: 30}}/>
+      </Row>
+      <Column style={styles.container}>
         <Column style={styles.sectionsContainer}>
           <ThemedText variant='headline2'>{t('settingSectionLanguages')}</ThemedText>
           <View>
@@ -74,6 +88,7 @@ const styles = StyleSheet.create({
   buttonRow: {
     marginHorizontal: 25,
     gap: 8,
+    alignItems: 'center',
   },
   container: {
     flex: 1,
@@ -82,17 +97,24 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  headerRow: {
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    maxHeight: 100,
+    alignItems: 'center',
+    paddingHorizontal: 5,
   },
   languageButton: {
     flex: 1,
-    height: 100,
     ...Platform.select({
       web: {
         maxWidth: '25%',
+        height: 250,
       },
       default: {
         maxWidth: '50%',
+        height: 125,
       },
     })
   },
