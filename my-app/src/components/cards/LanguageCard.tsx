@@ -1,8 +1,9 @@
-import { Image, Pressable, StyleSheet, View, ViewStyle } from "react-native";
+import { Dimensions, Image, Platform, Pressable, StyleSheet, View, ViewStyle } from "react-native";
 import { getThemeColors, useThemeColors } from "../../hooks/useThemeColors";
 import { Shadows } from "../../constants/Shadows";
 import { ThemedText } from "../ThemedText";
 import LanguageList from '../../services/LanguagesList.json';
+import { useEffect, useState } from "react";
 
 type Props = {
     style?: ViewStyle;
@@ -32,6 +33,27 @@ const images: Record<LanguageKeys, any> = {
 };
 
 export function LanguageCard({ style, languageName, onPress }: Props) {
+    // State to hold screen dimensions
+    const [dimensions, setDimensions] = useState({
+        width: Dimensions.get('window').width,
+    });
+
+    useEffect(() => {
+        const handleOrientationChange = () => {
+            setDimensions({
+                width: Dimensions.get('window').width,
+            });
+        };
+
+        // Add event listener for orientation changes
+        Dimensions.addEventListener('change', handleOrientationChange);
+    }, []);
+    const widthDivisor = Platform.OS === "web" ? 4 : 2
+    const screenWidth = (dimensions.width) / widthDivisor;
+    const aspectRatio = 366 / 550; // Height / Width from your original dimensions
+    const calculatedHeight = screenWidth * aspectRatio;
+    const textSize = calculatedHeight * 0.11;
+
     console.log('languageList', LanguageList,);
     console.log('LanguageName', languageName);
     const colors = useThemeColors();
@@ -41,13 +63,12 @@ export function LanguageCard({ style, languageName, onPress }: Props) {
     if (!image) {
         console.error(`Image for ${languageName} not found.`);
     }
-
     return (
-        <Pressable style={[style, styles.wrapper]} onPress={onPress}>
+        <Pressable style={[style, styles.wrapper, { width: screenWidth, height: calculatedHeight }]} onPress={onPress}>
             <View style={[styles.container]}>
-                <Image source={image} style={styles.image}/>
+                <Image source={image} style={styles.image} />
                 <View style={[styles.shadow, { shadowColor: theme === 'light' ? colors.grayDark : colors.grayLight }]} />
-                <ThemedText variant='body1' color={theme === 'light' ? 'grayLight' : 'grayDark'} style={styles.text}>
+                <ThemedText variant='body1' color={theme === 'light' ? 'grayDark' : 'grayLight'} style={[styles.text, { paddingVertical: (calculatedHeight / 2) - textSize , fontSize: textSize }]}>
                     {(LanguageList as LanguageListType)[languageName].nativeName}
                 </ThemedText>
             </View>
@@ -80,13 +101,19 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     text: {
-        textAlign: 'center',
         padding: 5,
         fontWeight: 'bold',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        textAlign: 'center',
     },
     wrapper: {
         padding: 5,
-        height: '100%',
+        maxHeight: '95%',
+        maxWidth: '95%',
         margin: 5,
     }
 });

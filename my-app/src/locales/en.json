@@ -4,9 +4,13 @@
     "goProfile": "Go to Profile",
     "goSettings": "Go to Settings",
     "homeScreen": "Home Screen",
+    "Login_LoginTitle": "Log in",
     "openApp": "Open up 'src/App.tsx' to start working on your app!",
     "selectLanguage": "Select a language",
     "settingsScreen": "Settings",
     "settingSectionLanguages":"Languages",
+    "Welcome_LoginButton": "Log in",
+    "Welcome_SignupButton": "Sign up",
+    "Welcome_Started": "Let's Get Started!",
     "welcome": "Welcome to React and react-i18next"
 }

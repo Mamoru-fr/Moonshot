@@ -6,7 +6,6 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
-import useAuth from '../hooks/useAuth';
 
 // Icons
 import bell from '../assets/bell.png';
@@ -88,6 +87,24 @@ const AuthRootStack = createNativeStackNavigator({
       path: '*',
     },
   },
+  Welcome: {
+    screen: Welcome,
+    options: {
+      headerShown: false,
+    },
+  },
+  Login: {
+    screen: Login,
+    options: {
+      headerShown: false,
+    },
+  },
+  Signup: {
+    screen: Signup,
+    options: {
+      headerShown: false,
+    },
+  },
 },
 });
 
@@ -113,8 +130,6 @@ const NoneAuthRootStack = createNativeStackNavigator({
     },
   }
 })
-
-const {user} = useAuth();
 
 
 export const Navigation = createStaticNavigation(AuthRootStack);

@@ -3,13 +3,14 @@ import { getThemeColors, useThemeColors } from "../hooks/useThemeColors";
 
 type Props = ViewProps & {
     onPress?: () => void;
+    color?: string;
 }
 
-export function Button({ onPress, style, ...rest }: Props) {
+export function Button({ onPress, style, color, ...rest }: Props) {
     const colors = useThemeColors();
     const theme = getThemeColors();
     return (
-        <Pressable onPress={onPress} style={[style, { backgroundColor: colors.purpleSoft }]}>
+        <Pressable onPress={onPress} style={[style, { backgroundColor: color? color : colors.purpleSoft }]}>
             <View {...rest} />
         </Pressable>
     )

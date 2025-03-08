@@ -44,7 +44,7 @@ export function Settings() {
             numColumns={Platform.OS === 'web' ? 4 : 2}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.languageButton}>
-                <LanguageCard languageName={item} onPress={() => chgLanguage(item)} />
+                <LanguageCard languageName={item} onPress={() => chgLanguage(item)}/>
               </TouchableOpacity>
             )}
             keyExtractor={(item) => item}
@@ -68,7 +68,7 @@ export function Settings() {
             <Button onPress={() => setVisible(true)} style={styles.button}>
               <Row style={styles.buttonRow}>
                 <Image source={languageLogo} />
-                <ThemedText variant='body2' style={{fontWeight: 'bold'}}>{t('changeLanguage')}</ThemedText>
+                <ThemedText variant='body2' color={'grayDark'} style={{fontWeight: 'bold'}}>{t('changeLanguage')}</ThemedText>
               </Row>
             </Button>
           </View>
@@ -110,11 +110,9 @@ const styles = StyleSheet.create({
     ...Platform.select({
       web: {
         maxWidth: '25%',
-        height: 250,
       },
       default: {
         maxWidth: '50%',
-        height: 125,
       },
     })
   },

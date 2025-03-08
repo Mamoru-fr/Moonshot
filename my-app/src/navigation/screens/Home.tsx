@@ -11,13 +11,16 @@ export function Home() {
   const colors = useThemeColors();
   return (
     <RootView style={styles.container}>
-      <Text>{t("homeScreen")}</Text>
-      <Text>{t("openApp")}</Text>
+      <ThemedText variant='body1'>{t("homeScreen")}</ThemedText>
+      <ThemedText variant='body1'>{t("openApp")}</ThemedText>
       <Button screen="Profile">
         {t('goProfile')}
       </Button>
       <Button screen="Settings">{t('goSettings')}</Button>
-      <ThemedText>{t("description")}</ThemedText>
+      <Button screen="Welcome">Welcome</Button>
+      <Button screen="Signup">Signup</Button>
+      <Button screen="Login">Login</Button>
+      <ThemedText variant='body1'>{t("description")}</ThemedText>
     </RootView>
   );
 }
