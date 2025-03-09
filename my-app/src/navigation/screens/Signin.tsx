@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RootView } from '../../components/RootView'
 import { ThemedText } from '../../components/ThemedText'
 import { useNavigation } from '@react-navigation/native'
@@ -9,6 +9,10 @@ import { Button } from '../../components/Button';
 import { useTranslation } from 'react-i18next';
 import { InputBox } from '../../components/InputBox';
 import { Separator } from '../../components/Separator';
+
+//firebase
+import { auth } from '../../config/firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 //logos
 import backArrowAndroidB from '../../assets/icons/backArrowAndroid.png'
@@ -28,6 +32,29 @@ export function Signin() {
     ) : (
         Platform.OS === 'ios' ? backArrowIOSW : Platform.OS === 'android' ? backArrowAndroidW : backArrowWebW
     );
+
+    const [email, setEmail] = useState('');
+    const [password, setEmail] = useState('')
+
+    const signIn = async () => {
+        try {
+            const user = await signInWithEmailAndPassword(auth, email, password)
+            if (user) navigation.navigate('HomeTabs')
+        } catch (error: any) {
+            console.log(error);
+            alert('Sign in failed: '+ error.message);
+        }
+    }
+
+    const signUp = async () => {
+        try {
+            const user = await createUserWithEmailAndPassword(auth, email, password)
+            if (user) navigation.navigate('Welcome')
+        } catch (error: any) {
+            console.log(error);
+            alert('Sign in failed: '+ error.message);
+        }
+    }
 
     return (
         <RootView>
