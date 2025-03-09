@@ -8,8 +8,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image } from 'react-native';
 
 // Icons
-import bell from '../assets/bell.png';
-import newspaper from '../assets/newspaper.png';
+import bell from '../assets/icons/bell.png';
+import newspaper from '../assets/icons/newspaper.png';
 
 // Screens
 import { Home } from './screens/Home';
@@ -18,7 +18,7 @@ import { Settings } from './screens/Settings';
 import { Updates } from './screens/Updates';
 import { NotFound } from './screens/NotFound';
 import { Welcome } from './screens/Welcome';
-import { Login } from './screens/Login';
+import { Signin } from './screens/Signin';
 import { Signup } from './screens/Signup';
 
 const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
@@ -93,8 +93,8 @@ const AuthRootStack = createNativeStackNavigator({
       headerShown: false,
     },
   },
-  Login: {
-    screen: Login,
+  Signin: {
+    screen: Signin,
     options: {
       headerShown: false,
     },
@@ -117,7 +117,7 @@ const NoneAuthRootStack = createNativeStackNavigator({
       },
     },
     Login: {
-      screen: Login,
+      screen: Signin,
       options: {
         headerShown: false,
       },

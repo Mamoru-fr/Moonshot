@@ -9,7 +9,7 @@ import { Column } from '../../components/Column';
 import { Button } from '../../components/Button';
 import { useTranslation } from 'react-i18next';
 
-import arrow from '../../assets/backArrowWeb.png'
+import arrow from '../../assets/icons/backArrowWeb.png'
 
 export function Welcome() {
     const colors = useThemeColors();
@@ -22,8 +22,8 @@ export function Welcome() {
                 <ThemedText variant='headline'>{t('Welcome_Started')}</ThemedText>
             </Row>
             <Column style={styles.buttonContainer}>
-                <Button style={styles.button} onPress={() => navigation.navigate('Login')}>
-                    <ThemedText variant='subtitle1'>{t('Welcome_LoginButton')}</ThemedText>
+                <Button style={styles.button} onPress={() => navigation.navigate('Signin')}>
+                    <ThemedText variant='subtitle1'>{t('Welcome_SigninButton')}</ThemedText>
                 </Button>
                 <Button style={styles.button} onPress={() => navigation.navigate('Signup')}>
                     <ThemedText variant='subtitle1'>{t('Welcome_SignupButton')}</ThemedText>

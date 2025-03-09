@@ -11,10 +11,10 @@ import { Column } from '../../components/Column';
 import { Row } from '../../components/Row';
 
 // import logos
-import languageLogo from '../../assets/language.png';
-import backArrowAndroid from '../../assets/backArrowAndroid.png'
-import backArrowIOS from '../../assets/backArrowIOS.png'
-import backArrowWeb from '../../assets/backArrowWeb.png'
+import languageLogo from '../../assets/icons/language.png';
+import backArrowAndroid from '../../assets/icons/backArrowAndroid.png'
+import backArrowIOS from '../../assets/icons/backArrowIOS.png'
+import backArrowWeb from '../../assets/icons/backArrowWeb.png'
 import { Button } from '../../components/Button';
 import { useNavigation } from '@react-navigation/native';
 
@@ -56,7 +56,7 @@ export function Settings() {
           <Image source={backArrow}/>
         </Pressable>
         <View style={styles.header}>
-          <Image source={require('../../assets/gear.png')} style={styles.settingsLogo} />
+          <Image source={require('../../assets/icons/gear.png')} style={styles.settingsLogo} />
           <ThemedText variant='headline2'>{t('settingsScreen')}</ThemedText>
         </View>
         <View style={{width: 30}}/>

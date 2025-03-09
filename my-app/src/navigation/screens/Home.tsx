@@ -18,8 +18,8 @@ export function Home() {
       </Button>
       <Button screen="Settings">{t('goSettings')}</Button>
       <Button screen="Welcome">Welcome</Button>
-      <Button screen="Signup">Signup</Button>
-      <Button screen="Login">Login</Button>
+      <Button screen="Signup">Sign up</Button>
+      <Button screen="Signin">Sign in</Button>
       <ThemedText variant='body1'>{t("description")}</ThemedText>
     </RootView>
   );

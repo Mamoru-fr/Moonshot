@@ -18,7 +18,7 @@ import backArrowAndroidW from '../../assets/icons/backArrowAndroidWhite.png'
 import backArrowIOSW from '../../assets/icons/backArrowIOSWhite.png'
 import backArrowWebW from '../../assets/icons/backArrowWebWhite.png'
 
-export function Signup() {
+export function Signin() {
     const colors = useThemeColors();
     const theme = getThemeColors();
     const navigation = useNavigation();
@@ -34,8 +34,8 @@ export function Signup() {
             <Pressable onPress={navigation.goBack}>
                 <Image source={backArrow} style={{ paddingTop: 10 }} />
             </Pressable>
-            <Column style={[styles.container, { borderColor: theme === 'light' ? colors.grayDark : colors.grayLight}]}>
-                <ThemedText variant='headline' style={{ marginBottom: 40 }}>{t('Signup_SigninTitle')}</ThemedText>
+            <Column style={[styles.container, { borderColor: theme === 'light' ? colors.grayDark : colors.grayLight }]}>
+                <ThemedText variant='headline' style={{ marginBottom: 40 }}>{t('Signin_SigninTitle')}</ThemedText>
                 <InputBox style={[styles.inputBox, { marginBottom: 40 }]}
                     placeholder='Email'
                     autoCompleteType='email'
@@ -45,26 +45,29 @@ export function Signup() {
                     security={true}
                     autoCompleteType='current-password'
                     textContentType='password' />
+                <Pressable style={{ marginBottom: 20 }}>
+                    <ThemedText style={styles.forgotPasswordSection} color={theme === 'light' ? 'purpleDeep' : 'purpleSoft'}>{t('Signin_ForgotPassword')}</ThemedText>
+                </Pressable>
                 <Button style={styles.signinButton}>
-                    <ThemedText variant='body1'>{t('Signup_SigninButton')}</ThemedText>
+                    <ThemedText variant='body1'>{t('Signin_SigninButton')}</ThemedText>
                 </Button>
                 <Separator textInput='or' style={styles.separator} />
                 {Platform.OS === 'ios' ? (
                     <Column style={{ gap: 8 }}>
                         <Button image={require('../../assets/logos/Apple_logo_black.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={16}>
-                            <ThemedText variant='body1'>{t('Signup_SigninWithApple')}</ThemedText>
+                            <ThemedText variant='body1'>{t('Signin_SigninWithApple')}</ThemedText>
                         </Button>
                         <Button image={require('../../assets/logos/Google__G__logo.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={18}>
-                            <ThemedText variant='body1'>{t('Signup_SigninWithGoogle')}</ThemedText>
+                            <ThemedText variant='body1'>{t('Signin_SigninWithGoogle')}</ThemedText>
                         </Button>
                     </Column>
                 ) : (
                     <Column style={{ gap: 8 }}>
                         <Button image={require('../../assets/logos/Google__G__logo.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={18}>
-                            <ThemedText variant='body1'>{t('Signup_SigninWithGoogle')}</ThemedText>
+                            <ThemedText variant='body1'>{t('Signin_SigninWithGoogle')}</ThemedText>
                         </Button>
                         <Button image={require('../../assets/logos/Apple_logo_black.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={16}>
-                            <ThemedText variant='body1'>{t('Signup_SigninWithApple')}</ThemedText>
+                            <ThemedText variant='body1'>{t('Signin_SigninWithApple')}</ThemedText>
                         </Button>
                     </Column>
                 )}
