@@ -34,7 +34,7 @@ export function Signin() {
     );
 
     const [email, setEmail] = useState('');
-    const [password, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const signIn = async () => {
         try {
