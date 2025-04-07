@@ -1,22 +1,35 @@
-import { FlatList, Image, Modal, Platform, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useTranslation } from "react-i18next";
-import { useState } from 'react';
-import i18next from 'i18next';
-import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
-import { ThemedText } from '../../components/ThemedText';
-import { LanguageCard } from '../../components/cards/LanguageCard';
-import { languageResources } from '../../services/i18next';
-import { RootView } from '../../components/RootView';
-import { Column } from '../../components/Column';
-import { Row } from '../../components/Row';
+// Imports 
+  import React from "react";
 
-// import logos
-import languageLogo from '../../assets/icons/language.png';
-import backArrowAndroid from '../../assets/icons/backArrowAndroid.png'
-import backArrowIOS from '../../assets/icons/backArrowIOS.png'
-import backArrowWeb from '../../assets/icons/backArrowWeb.png'
-import { Button } from '../../components/Button';
-import { useNavigation } from '@react-navigation/native';
+  // Assets
+    // Logos
+      import languageLogo from '../../assets/icons/language.png';
+      import backArrowAndroid from '../../assets/icons/backArrowAndroid.png'
+      import backArrowIOS from '../../assets/icons/backArrowIOS.png'
+      import backArrowWeb from '../../assets/icons/backArrowWeb.png'
+
+  // Components
+    import { Button } from '../../components/Button';
+    import { Column } from '../../components/Column';
+    import { LanguageCard } from '../../components/cards/LanguageCard';
+    import { RootView } from '../../components/RootView';
+    import { Row } from '../../components/Row';
+    import { ThemedText } from '../../components/ThemedText';
+
+  // Hooks
+    import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
+    
+  // Navigation
+    import { useNavigation } from '@react-navigation/native';
+
+  // React & React Native Components
+    import { useState } from 'react'; 
+    import { FlatList, Image, Modal, Platform, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
+
+  // Translation
+    import i18next from 'i18next';
+    import { languageResources } from '../../services/i18next';
+    import { useTranslation } from "react-i18next";
 
 export function Settings() {
   const { t } = useTranslation();

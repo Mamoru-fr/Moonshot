@@ -1,5 +1,8 @@
-import { Text } from '@react-navigation/elements';
-import { StyleSheet, View } from 'react-native';
+// Imports
+  // React & React Native Components
+    import React from 'react';
+    import { Text } from '@react-navigation/elements';
+    import { StyleSheet, View } from 'react-native';
 
 export function Updates() {
   return (

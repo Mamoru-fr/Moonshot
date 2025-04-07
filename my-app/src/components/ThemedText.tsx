@@ -1,6 +1,12 @@
-import { StyleSheet, Text, TextProps } from "react-native";
-import { Colors } from "../constants/Colors";
-import { getThemeColors, useThemeColors } from "../hooks/useThemeColors";
+// Imports
+    // Constants
+    import { Colors } from "../constants/Colors";
+    // Hooks
+    import { getThemeColors, useThemeColors } from "../hooks/useThemeColors";
+    
+    // React & React Native Components
+        import React from "react";
+        import { StyleSheet, Text, TextProps } from "react-native";
 
 const styles = StyleSheet.create({
     body1: {
@@ -27,6 +33,11 @@ const styles = StyleSheet.create({
     headline2: {
         fontSize: 20,
         lineHeight: 26,
+        fontWeight: "bold",
+    },
+    headline3: {
+        fontSize: 16,
+        lineHeight: 22,
         fontWeight: "bold",
     },
     subtitle1: {

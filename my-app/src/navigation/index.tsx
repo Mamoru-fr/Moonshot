@@ -1,25 +1,24 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-  createStaticNavigation,
-  NavigationContainer,
-  StaticParamList,
-} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image } from 'react-native';
-
-// Icons
-import bell from '../assets/icons/bell.png';
-import newspaper from '../assets/icons/newspaper.png';
-
-// Screens
-import { Home } from './screens/Home';
-import { Profile } from './screens/Profile';
-import { Settings } from './screens/Settings';
-import { Updates } from './screens/Updates';
-import { NotFound } from './screens/NotFound';
-import { Welcome } from './screens/Welcome';
-import { Signin } from './screens/Signin';
-import { Signup } from './screens/Signup';
+// Imports
+  // Assets
+    // Icons
+      import bell from '../assets/icons/bell.png';
+      import newspaper from '../assets/icons/newspaper.png';
+  // Navigation
+    import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+    import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
+    import { createNativeStackNavigator } from '@react-navigation/native-stack';
+  // React & React Native Components
+    import React from 'react';
+    import { Image } from 'react-native';
+  // Screens
+    import { Home } from './screens/Home';
+    import { Profile } from './screens/Profile';
+    import { Settings } from './screens/Settings';
+    import { Updates } from './screens/Updates';
+    import { NotFound } from './screens/NotFound';
+    import { Welcome } from './screens/Welcome';
+    import { Signin } from './screens/Signin';
+    import { Signup } from './screens/Signup';
 
 const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
   screens: {
@@ -132,7 +131,11 @@ const NoneAuthRootStack = createNativeStackNavigator({
 })
 
 
-export const Navigation = createStaticNavigation(AuthRootStack);
+// Static Navigation List
+  const AuthNavigation = createStaticNavigation(AuthRootStack);
+  const NoneAuthNavigation = createStaticNavigation(NoneAuthRootStack)
+
+export const Navigation = AuthNavigation;
 
 type RootStackParamList = StaticParamList<typeof AuthRootStack>;
 

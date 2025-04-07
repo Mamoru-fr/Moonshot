@@ -1,5 +1,9 @@
-import { Text } from '@react-navigation/elements';
-import { StyleSheet, View } from 'react-native';
+// Imports 
+  import React from 'react';
+
+  // React & React Native Components
+    import { Text } from '@react-navigation/elements';
+    import { StyleSheet, View } from 'react-native';
 
 export function Profile() {
   return (

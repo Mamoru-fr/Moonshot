@@ -1,6 +1,10 @@
-import { Platform, StatusBar, ViewProps, ViewStyle } from "react-native";
-import { getThemeColors, useThemeColors } from "../hooks/useThemeColors";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+// Imports
+    // Hooks
+        import { getThemeColors, useThemeColors } from "../hooks/useThemeColors";
+    // React & React Native Components
+        import React from "react";
+        import { Platform, StatusBar, ViewProps, ViewStyle } from "react-native";
+        import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 type Props = ViewProps & {
     color?: string,

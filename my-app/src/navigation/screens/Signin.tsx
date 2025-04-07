@@ -1,58 +1,73 @@
-import React, { useState } from 'react'
-import { RootView } from '../../components/RootView'
-import { ThemedText } from '../../components/ThemedText'
-import { useNavigation } from '@react-navigation/native'
-import { Image, Platform, Pressable, StyleSheet, View } from 'react-native';
-import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
-import { Column } from '../../components/Column';
-import { Button } from '../../components/Button';
-import { useTranslation } from 'react-i18next';
-import { InputBox } from '../../components/InputBox';
-import { Separator } from '../../components/Separator';
+// Imports
+    // Assets
+        // Logos
+            import backArrowAndroidB from '../../assets/icons/backArrowAndroid.png'
+            import backArrowAndroidW from '../../assets/icons/backArrowAndroidWhite.png'
+            import backArrowIOSB from '../../assets/icons/backArrowIOS.png'
+            import backArrowIOSW from '../../assets/icons/backArrowIOSWhite.png'
+            import backArrowWebB from '../../assets/icons/backArrowWeb.png'
+            import backArrowWebW from '../../assets/icons/backArrowWebWhite.png'
 
-//firebase
-import { auth } from '../../config/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+    // Components
+        import { Button } from '../../components/Button';
+        import { Column } from '../../components/Column';
+        import { InputBox } from '../../components/InputBox';
+        import { RootView } from '../../components/RootView';
+        import { Row } from '../../components/Row';
+        import { Separator } from '../../components/Separator';
+        import { ThemedText } from '../../components/ThemedText';
 
-//logos
-import backArrowAndroidB from '../../assets/icons/backArrowAndroid.png'
-import backArrowIOSB from '../../assets/icons/backArrowIOS.png'
-import backArrowWebB from '../../assets/icons/backArrowWeb.png'
-import backArrowAndroidW from '../../assets/icons/backArrowAndroidWhite.png'
-import backArrowIOSW from '../../assets/icons/backArrowIOSWhite.png'
-import backArrowWebW from '../../assets/icons/backArrowWebWhite.png'
+    // Hooks
+        import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
+
+    // Navigation
+        import { useNavigation } from '@react-navigation/native'
+        import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+        import { NoAuthStackParamList } from '../../constants/navigationTypes';
+        type SigninScreenNavigationProp = NativeStackNavigationProp<NoAuthStackParamList, "Signin">
+
+    // React & React Native Components
+        import React, { useState } from 'react'
+        import { ActivityIndicator, Image, KeyboardAvoidingView, Platform, Pressable, StyleSheet } from 'react-native';
+
+    // Translation
+        import { useTranslation } from 'react-i18next'; 
 
 export function Signin() {
-    const colors = useThemeColors();
-    const theme = getThemeColors();
-    const navigation = useNavigation();
-    const { t } = useTranslation();
-    const backArrow = theme === 'light' ? (
-        Platform.OS === 'ios' ? backArrowIOSB : Platform.OS === 'android' ? backArrowAndroidB : backArrowWebB
-    ) : (
-        Platform.OS === 'ios' ? backArrowIOSW : Platform.OS === 'android' ? backArrowAndroidW : backArrowWebW
-    );
+    // Hooks in Function
+        // Authentificator
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('')
+            const [loading, setLoading] = useState(false)
+        // Colors 
+            const colors = useThemeColors();
+            const theme = getThemeColors();
+        // Navigation
+            const navigation = useNavigation<SigninScreenNavigationProp>();
+        // Translation
+            const { t } = useTranslation();
+    
+    // Conponents in function
+        const backArrow = theme === 'light' ? (
+            Platform.OS === 'ios' ? backArrowIOSB : Platform.OS === 'android' ? backArrowAndroidB : backArrowWebB
+        ) : (
+            Platform.OS === 'ios' ? backArrowIOSW : Platform.OS === 'android' ? backArrowAndroidW : backArrowWebW
+        );
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('')
-
-    const signIn = async () => {
-        try {
-            const user = await signInWithEmailAndPassword(auth, email, password)
-            if (user) navigation.navigate('HomeTabs')
-        } catch (error: any) {
-            console.log(error);
-            alert('Sign in failed: '+ error.message);
-        }
+    const resetPassword = () => {
+        setPassword('');
     }
-
-    const signUp = async () => {
+    const singIn = async () => {
+        setLoading(true);
         try {
-            const user = await createUserWithEmailAndPassword(auth, email, password)
-            if (user) navigation.navigate('Welcome')
+            //const response = await signInWithEmailAndPassword(auth, email, password);
+            //console.log(response);
         } catch (error: any) {
-            console.log(error);
-            alert('Sign in failed: '+ error.message);
+            console.error(error);
+            resetPassword();
+            alert('Sign in failed: ' + error.message);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -61,44 +76,64 @@ export function Signin() {
             <Pressable onPress={navigation.goBack}>
                 <Image source={backArrow} style={{ paddingTop: 10 }} />
             </Pressable>
-            <Column style={[styles.container, { borderColor: theme === 'light' ? colors.grayDark : colors.grayLight }]}>
-                <ThemedText variant='headline' style={{ marginBottom: 40 }}>{t('Signin_SigninTitle')}</ThemedText>
-                <InputBox style={[styles.inputBox, { marginBottom: 40 }]}
-                    placeholder='Email'
-                    autoCompleteType='email'
-                    textContentType='emailAddress' />
-                <InputBox style={[styles.inputBox, { marginBottom: 10 }]}
-                    placeholder='Password'
-                    security={true}
-                    autoCompleteType='current-password'
-                    textContentType='password' />
-                <Pressable style={{ marginBottom: 20 }}>
-                    <ThemedText style={styles.forgotPasswordSection} color={theme === 'light' ? 'purpleDeep' : 'purpleSoft'}>{t('Signin_ForgotPassword')}</ThemedText>
-                </Pressable>
-                <Button style={styles.signinButton}>
-                    <ThemedText variant='body1'>{t('Signin_SigninButton')}</ThemedText>
-                </Button>
-                <Separator textInput='or' style={styles.separator} />
-                {Platform.OS === 'ios' ? (
-                    <Column style={{ gap: 8 }}>
-                        <Button image={require('../../assets/logos/Apple_logo_black.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={16}>
-                            <ThemedText variant='body1'>{t('Signin_SigninWithApple')}</ThemedText>
-                        </Button>
-                        <Button image={require('../../assets/logos/Google__G__logo.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={18}>
-                            <ThemedText variant='body1'>{t('Signin_SigninWithGoogle')}</ThemedText>
-                        </Button>
-                    </Column>
-                ) : (
-                    <Column style={{ gap: 8 }}>
-                        <Button image={require('../../assets/logos/Google__G__logo.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={18}>
-                            <ThemedText variant='body1'>{t('Signin_SigninWithGoogle')}</ThemedText>
-                        </Button>
-                        <Button image={require('../../assets/logos/Apple_logo_black.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={16}>
-                            <ThemedText variant='body1'>{t('Signin_SigninWithApple')}</ThemedText>
-                        </Button>
-                    </Column>
-                )}
-            </Column>
+            <KeyboardAvoidingView behavior='padding'>
+                <Column style={[styles.container, { borderColor: theme === 'light' ? colors.grayDark : colors.grayLight }]}>
+                    <ThemedText variant='headline' style={{ marginBottom: 40 }}>{t('Signin_SigninTitle')}</ThemedText>
+                    <InputBox style={[styles.inputBox, { marginBottom: 40 }]}
+                        placeholder='Email'
+                        autoCompleteType='email'
+                        textContentType='emailAddress'
+                        onChange={(text) => setEmail(text)}
+                        value={email} />
+                    <InputBox style={[styles.inputBox, { marginBottom: 10 }]}
+                        placeholder='Password'
+                        security={true}
+                        autoCompleteType='current-password'
+                        textContentType='password'
+                        value={password}
+                        onChange={(text) => setPassword(text)} />
+                    <Pressable style={{ marginBottom: 20 }}>
+                        <ThemedText style={styles.forgotPasswordSection} color={theme === 'light' ? 'purpleDeep' : 'purpleSoft'}>{t('Signin_ForgotPassword')}</ThemedText>
+                    </Pressable>
+                    {loading ? (
+                        <ActivityIndicator size='large' color={colors.purpleSoft} />
+                    ) : (
+                        <>
+                            <Button style={styles.signinButton} onPress={singIn}>
+                                <ThemedText variant='body1'>{t('Signin_SigninButton')}</ThemedText>
+                            </Button><Separator textInput='or' style={styles.separator} />
+                        </>
+                    )}
+                    {loading ? (
+                        <ActivityIndicator size='large' color={colors.purpleSoft} />
+                    ) : Platform.OS === 'ios' ? (
+                        <Column style={{ gap: 8 }}>
+                            <Button image={require('../../assets/logos/Apple_logo_black.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={16}>
+                                <ThemedText variant='body1'>{t('Signin_SigninWithApple')}</ThemedText>
+                            </Button>
+                            <Button image={require('../../assets/logos/Google__G__logo.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={18}>
+                                <ThemedText variant='body1'>{t('Signin_SigninWithGoogle')}</ThemedText>
+                            </Button>
+                        </Column>
+                    ) : (
+                        <Column style={{ gap: 8 }}>
+                            <Button image={require('../../assets/logos/Google__G__logo.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={18}>
+                                <ThemedText variant='body1'>{t('Signin_SigninWithGoogle')}</ThemedText>
+                            </Button>
+                            <Button image={require('../../assets/logos/Apple_logo_black.png')} style={styles.signinButton} imageSizeHeight={20} imageSizeWidth={16}>
+                                <ThemedText variant='body1'>{t('Signin_SigninWithApple')}</ThemedText>
+                            </Button>
+                        </Column>
+                    )}
+
+                </Column>
+                <Row style={{ justifyContent: 'center', alignItems: 'flex-start', gap: 8, marginTop: 20 }}>
+                    <ThemedText variant='headline3' style={{ fontWeight: 'normal' }}>{t('Signin_NewUserQuestion')} </ThemedText>
+                    <Pressable onPress={() => navigation.navigate('Signup')}>
+                        <ThemedText variant='headline3' style={{ fontWeight: 'normal' }} color={theme === 'light' ? 'purpleDeep' : 'purpleSoft'}>{t('Signin_NewUserClickLink')}</ThemedText>
+                    </Pressable>
+                </Row>
+            </KeyboardAvoidingView>
         </RootView>
     )
 }
@@ -114,6 +149,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: 400,
         maxHeight: 510,
+        minHeight: 510,
         maxWidth: '95%',
         ...Platform.select({
             web: {
