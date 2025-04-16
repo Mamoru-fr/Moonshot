@@ -23,7 +23,7 @@ export const Colors = {
     dark: {
         grayDark: "#212121",
         grayMedium: "#666666",
-        grayLight: "#F0F0F0",
+        grayLight: "#E0E0E0",
         purpleWhite: '#f9f5ff',
         purpleLight: '#f1e7ff',
         purpleSoft: '#e5d3ff',

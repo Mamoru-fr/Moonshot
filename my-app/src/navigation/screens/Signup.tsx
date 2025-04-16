@@ -2,11 +2,8 @@
     // Assets
         // Logos    
             import backArrowAndroidB from '../../assets/icons/backArrowAndroid.png'
-            import backArrowAndroidW from '../../assets/icons/backArrowAndroidWhite.png'
             import backArrowIOSB from '../../assets/icons/backArrowIOS.png'
-            import backArrowIOSW from '../../assets/icons/backArrowIOSWhite.png'
             import backArrowWebB from '../../assets/icons/backArrowWeb.png'
-            import backArrowWebW from '../../assets/icons/backArrowWebWhite.png'
 
     // Components
         import { Button } from '../../components/Button';
@@ -19,16 +16,16 @@
 
     // Hook
         import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
-
-    // React & React Native Components
-        import React, { useState } from 'react'
-        import { Image, KeyboardAvoidingView, Platform, Pressable, StyleSheet } from 'react-native';
+    
+    // Firebase
+        import { deviceAuth, webAuth } from '../../config/firebaseConfig'
 
     // Navigation
         import { useNavigation } from '@react-navigation/native'
-        import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-        import { NoAuthStackParamList } from '../../constants/navigationTypes';
-        type SignupScreenNavigationProp = NativeStackNavigationProp<NoAuthStackParamList, "Signup">
+        
+    // React & React Native Components
+        import React, { useState } from 'react'
+        import { Image, KeyboardAvoidingView, Platform, Pressable, StyleSheet } from 'react-native';
 
     // Translation
         import { useTranslation } from 'react-i18next';
@@ -43,16 +40,15 @@ export function Signup() {
             const colors = useThemeColors();
             const theme = getThemeColors();
         // Navigation
-            const navigation = useNavigation<SignupScreenNavigationProp>();
+            const navigation = useNavigation();
         // Translation
             const { t } = useTranslation();
     
     // Components in function
-        const backArrow = theme === 'light' ? (
+        const backArrow = (
             Platform.OS === 'ios' ? backArrowIOSB : Platform.OS === 'android' ? backArrowAndroidB : backArrowWebB
-        ) : (
-            Platform.OS === 'ios' ? backArrowIOSW : Platform.OS === 'android' ? backArrowAndroidW : backArrowWebW
-        );
+        ) 
+        
     // Constants in function
         const pswd: string = '';
         const confpswd: string = '';
@@ -66,9 +62,9 @@ export function Signup() {
         setLoading(true);
         pswd === confpswd && pswd != "" && confpswd != "" ? console.log('Passwords match') : alert('Passwords do not match!'), resetPassword(), setLoading(false);
         try {
-            //const response = await createUserWithEmailAndPassword(auth, email, password);
-            //console.log(response);
-            //alert('Check your emails!');
+            const response = Platform.OS==='web' && webAuth ? await webAuth.createUserWithEmailAndPassword(email, password) : deviceAuth ? await deviceAuth.createUserWithEmailAndPassword(email, password) : undefined;
+            console.log(response);
+            alert('Check your emails!');
         } catch (error: any) {
             console.error(error);
             resetPassword();

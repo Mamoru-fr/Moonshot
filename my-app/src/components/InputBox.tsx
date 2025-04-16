@@ -27,17 +27,19 @@
 
 export function InputBox({ style, color, placeholder, security = false, textContentType, autoCompleteType, onChange, value, ...rest }: Props) {
     // Hooks in function
-        const colors = useThemeColors();
-        const theme = getThemeColors();
-        const [visible, setVisibility] = useState(security)
+        // Colors
+            const colors = useThemeColors();
+            const theme = getThemeColors();
+        // Security
+            const [visible, setVisibility] = useState(security)
     
     return (
-        <View style={[styles.container, { backgroundColor: color ? color : theme === 'light' ? colors.grayLight : colors.grayDark }, style]}>
+        <View style={[styles.container, { backgroundColor: color ? color : colors.grayLight }, style]}>
             <Row style={styles.row}>
                 <TextInput
                     value={value}
                     placeholder={placeholder ? placeholder : "Placeholder"}
-                    style={[styles.text, { color: theme === 'light' ? colors.grayDark : colors.grayLight }]}
+                    style={[styles.text, { color: colors.grayDark }]}
                     secureTextEntry={visible}
                     textContentType={textContentType}
                     autoComplete={autoCompleteType}

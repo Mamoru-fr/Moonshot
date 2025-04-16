@@ -3,6 +3,8 @@
     // Icons
       import bell from '../assets/icons/bell.png';
       import newspaper from '../assets/icons/newspaper.png';
+  // Firebase
+    import { User } from '@firebase/auth'
   // Navigation
     import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
     import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
@@ -57,7 +59,7 @@ const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
   },
 });
 
-const AuthRootStack = createNativeStackNavigator({
+const RootStack = createNativeStackNavigator({
   screens: {
     HomeTabs: {
       screen: HomeTabs,
@@ -106,41 +108,13 @@ const AuthRootStack = createNativeStackNavigator({
   },
 },
 });
+  
+export const Navigation = createStaticNavigation(RootStack);
 
-const NoneAuthRootStack = createNativeStackNavigator({
-  screens: {
-    Welcome: {
-      screen: Welcome,
-      options: {
-        headerShown: false,
-      },
-    },
-    Login: {
-      screen: Signin,
-      options: {
-        headerShown: false,
-      },
-    },
-    Signup: {
-      screen: Signup,
-      options: {
-        headerShown: false,
-      },
-    },
-  }
-})
-
-
-// Static Navigation List
-  const AuthNavigation = createStaticNavigation(AuthRootStack);
-  const NoneAuthNavigation = createStaticNavigation(NoneAuthRootStack)
-
-export const Navigation = AuthNavigation;
-
-type RootStackParamList = StaticParamList<typeof AuthRootStack>;
+type RootStackParamList = StaticParamList<typeof RootStack>;
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList { }
+    interface RootParamList extends RootStackParamList {}
   }
 }

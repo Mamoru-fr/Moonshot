@@ -2,7 +2,7 @@
     // Constants
     import { Colors } from "../constants/Colors";
     // Hooks
-    import { getThemeColors, useThemeColors } from "../hooks/useThemeColors";
+    import { useThemeColors } from "../hooks/useThemeColors";
     
     // React & React Native Components
         import React from "react";
@@ -64,9 +64,8 @@ type Props = TextProps & {
 
 export function ThemedText({ variant, color, style, ...rest}: Props) {
     const colors = useThemeColors();
-    const theme = getThemeColors();
-    const colors_used = theme === 'light' ? 'grayDark': 'grayLight';
-    return (<Text style={[styles[variant?? 'body3'], style, {color: colors[color ? color : colors_used]}]} {...rest}/>)
+    const colors_used = 'grayDark';
+    return (<Text style={[styles[variant?? 'body3'], {color: colors[color ? color : colors_used]}, style]} {...rest}/>)
 };
 
 export function CapitalizeFirstLetter(text: string) {

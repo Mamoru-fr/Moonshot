@@ -5,7 +5,7 @@
         import { getThemeColors, useThemeColors } from "../hooks/useThemeColors";
     // React & React Native Components
         import React from "react";    
-        import { Image, ImageSourcePropType, Pressable, StyleSheet, View, ViewProps } from "react-native";
+        import { Image, ImageSourcePropType, Pressable, StyleSheet, Text, View, ViewProps } from "react-native";
 // Types
     // Props
         type Props = ViewProps & {
@@ -23,14 +23,14 @@ export function Button({ onPress, style, color, image, imageSizeHeight, imageSiz
         <Pressable
             onPress={onPress}
             style={[styles.ButtonStyle, {
-                backgroundColor: color ? color : theme === 'light' ? colors.purpleSoft : colors.purpleDeep
+                backgroundColor: color ? color : colors.purpleSoft 
             }, style
             ]}>
             <Row style={styles.ButtonRow}>
                 {image && (
                     <Image source={image} style={[styles.ButtonImage, {width: (imageSizeWidth ? imageSizeWidth : 16), height: (imageSizeHeight ? imageSizeHeight: 16)}]}/>
                 )}
-                <View {...rest} />
+                <View><Text {...rest}/></View>
             </Row>
         </Pressable>
     )

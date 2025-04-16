@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+# Firebase
+src\config\firebaseConfigRequiere.ts
+
 # Expo
 .expo/
 dist/

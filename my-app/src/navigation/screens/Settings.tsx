@@ -48,8 +48,8 @@ export function Settings() {
   return (
     <RootView style={styles.wrapper}>
       <Modal visible={visible} onRequestClose={() => setVisible(true)} animationType="slide">
-        <View style={[styles.languageList, { backgroundColor: theme === 'light' ? colors.purpleSoft : colors.purpleRich }]}>
-          <View style={[styles.languageListHeader, { backgroundColor: theme === 'light' ? colors.purplePastel : colors.purpleDeep }]}>
+        <View style={[styles.languageList, { backgroundColor: colors.purpleSoft }]}>
+          <View style={[styles.languageListHeader, { backgroundColor: colors.purplePastel }]}>
             <ThemedText variant='headline2'>{t("selectLanguage")}</ThemedText>
           </View>
           <FlatList
@@ -81,7 +81,7 @@ export function Settings() {
             <Button onPress={() => setVisible(true)} style={styles.button}>
               <Row style={styles.buttonRow}>
                 <Image source={languageLogo} />
-                <ThemedText variant='body2' color={'grayDark'} style={{fontWeight: 'bold'}}>{t('changeLanguage')}</ThemedText>
+                <ThemedText variant='body2' color={'grayDark'} style={{fontWeight: 'bold', flex: 1}}>{t('changeLanguage')}</ThemedText>
               </Row>
             </Button>
           </View>

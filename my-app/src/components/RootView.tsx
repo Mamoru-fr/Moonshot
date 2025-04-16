@@ -16,7 +16,7 @@ export function RootView({style, color, ...rest}: Props) {
     return (
         <SafeAreaProvider>
             <StatusBar translucent />
-            <SafeAreaView style={[RootStyle , style, {backgroundColor: color? color : theme === 'light' ? colors.white : colors.black}]} {...rest}/>
+            <SafeAreaView style={[RootStyle , style, {backgroundColor: color? color : colors.white}]} {...rest}/>
         </SafeAreaProvider>
     )
 }

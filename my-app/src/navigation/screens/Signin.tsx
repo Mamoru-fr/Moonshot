@@ -2,11 +2,8 @@
     // Assets
         // Logos
             import backArrowAndroidB from '../../assets/icons/backArrowAndroid.png'
-            import backArrowAndroidW from '../../assets/icons/backArrowAndroidWhite.png'
             import backArrowIOSB from '../../assets/icons/backArrowIOS.png'
-            import backArrowIOSW from '../../assets/icons/backArrowIOSWhite.png'
             import backArrowWebB from '../../assets/icons/backArrowWeb.png'
-            import backArrowWebW from '../../assets/icons/backArrowWebWhite.png'
 
     // Components
         import { Button } from '../../components/Button';
@@ -20,12 +17,12 @@
     // Hooks
         import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
 
+    // Firebase
+        import { deviceAuth, webAuth } from '../../config/firebaseConfig'
+
     // Navigation
         import { useNavigation } from '@react-navigation/native'
-        import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-        import { NoAuthStackParamList } from '../../constants/navigationTypes';
-        type SigninScreenNavigationProp = NativeStackNavigationProp<NoAuthStackParamList, "Signin">
-
+        
     // React & React Native Components
         import React, { useState } from 'react'
         import { ActivityIndicator, Image, KeyboardAvoidingView, Platform, Pressable, StyleSheet } from 'react-native';
@@ -43,16 +40,14 @@ export function Signin() {
             const colors = useThemeColors();
             const theme = getThemeColors();
         // Navigation
-            const navigation = useNavigation<SigninScreenNavigationProp>();
+            const navigation = useNavigation();
         // Translation
             const { t } = useTranslation();
     
-    // Conponents in function
-        const backArrow = theme === 'light' ? (
+    // Components in function
+        const backArrow = (
             Platform.OS === 'ios' ? backArrowIOSB : Platform.OS === 'android' ? backArrowAndroidB : backArrowWebB
-        ) : (
-            Platform.OS === 'ios' ? backArrowIOSW : Platform.OS === 'android' ? backArrowAndroidW : backArrowWebW
-        );
+        ) 
 
     const resetPassword = () => {
         setPassword('');
@@ -60,8 +55,8 @@ export function Signin() {
     const singIn = async () => {
         setLoading(true);
         try {
-            //const response = await signInWithEmailAndPassword(auth, email, password);
-            //console.log(response);
+            const response = Platform.OS === 'web' && webAuth ? await webAuth.signInWithEmailAndPassword(email, password) : deviceAuth ? await deviceAuth.signInWithEmailAndPassword(email, password) : undefined;
+            console.log(response);
         } catch (error: any) {
             console.error(error);
             resetPassword();
@@ -93,7 +88,7 @@ export function Signin() {
                         value={password}
                         onChange={(text) => setPassword(text)} />
                     <Pressable style={{ marginBottom: 20 }}>
-                        <ThemedText style={styles.forgotPasswordSection} color={theme === 'light' ? 'purpleDeep' : 'purpleSoft'}>{t('Signin_ForgotPassword')}</ThemedText>
+                        <ThemedText style={styles.forgotPasswordSection} color={'purpleDeep'}>{t('Signin_ForgotPassword')}</ThemedText>
                     </Pressable>
                     {loading ? (
                         <ActivityIndicator size='large' color={colors.purpleSoft} />
@@ -130,7 +125,7 @@ export function Signin() {
                 <Row style={{ justifyContent: 'center', alignItems: 'flex-start', gap: 8, marginTop: 20 }}>
                     <ThemedText variant='headline3' style={{ fontWeight: 'normal' }}>{t('Signin_NewUserQuestion')} </ThemedText>
                     <Pressable onPress={() => navigation.navigate('Signup')}>
-                        <ThemedText variant='headline3' style={{ fontWeight: 'normal' }} color={theme === 'light' ? 'purpleDeep' : 'purpleSoft'}>{t('Signin_NewUserClickLink')}</ThemedText>
+                        <ThemedText variant='headline3' style={{ fontWeight: 'normal' }} color={'purpleDeep'}>{t('Signin_NewUserClickLink')}</ThemedText>
                     </Pressable>
                 </Row>
             </KeyboardAvoidingView>
@@ -156,7 +151,7 @@ const styles = StyleSheet.create({
                 marginTop: 80
             },
             default: {
-                marginTop: '15%'
+                marginTop: '10%'
             },
         })
     },

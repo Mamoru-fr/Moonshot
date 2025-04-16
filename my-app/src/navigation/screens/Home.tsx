@@ -34,10 +34,10 @@ export function Home() {
       <Button onPress={() => navigation.navigate('Profile')}>
         <Text>{t('goProfile')}</Text>
       </Button>
-      <Button onPress={() => navigation.navigate('Settings')}><Text>{t('goSettings')}</Text></Button>
-      <Button onPress={() => navigation.navigate('Welcome')}><Text>Welcome</Text></Button>
-      <Button onPress={() => navigation.navigate('Signup')}><Text>Sign up</Text></Button>
-      <Button onPress={() => navigation.navigate('Signin')}><Text>Sign in</Text></Button>
+      <Button onPress={() => navigation.navigate('Settings')}>{t('goSettings')}</Button>
+      <Button onPress={() => navigation.navigate('Welcome')}>Welcome</Button>
+      <Button onPress={() => navigation.navigate('Signup')}>Sign up</Button>
+      <Button onPress={() => navigation.navigate('Signin')}>Sign in</Button>
       <ThemedText variant='body1'>{t("description")}</ThemedText>
     </RootView>
   );

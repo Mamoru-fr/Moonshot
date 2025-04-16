@@ -27,3 +27,4 @@ doc/api/
 .flutter-plugins-dependencies
 
 /my-app/node_modules/
+/my-app/src\config\firebaseConfigRequiere.ts
