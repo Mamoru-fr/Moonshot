@@ -1,5 +1,5 @@
 // Inputs from firebase config for Device and Web
-import { FIREBASE_APP, FIREBASE_DB } from './firebaseConfigDevice'
+import { FIREBASE_APP, FIREBASE_AUTH } from './firebaseConfigDevice'
 import { webApp, webAuth, getWebAuth } from './firebaseConfigWeb';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@firebase/auth';
 
@@ -15,10 +15,9 @@ let deviceDatabase;
 
 // Initialize Firebase for Device
 deviceApp = FIREBASE_APP;
-deviceDatabase = FIREBASE_DB;
 deviceAuth = {
-  signInWithEmailAndPassword: (email: string, password: string) => signInWithEmailAndPassword(FIREBASE_APP.auth, email, password),
-  createUserWithEmailAndPassword: (email: string, password: string) => createUserWithEmailAndPassword(FIREBASE_APP.auth, email, password) 
+  signInWithEmailAndPassword: (email: string, password: string) => FIREBASE_AUTH.signInWithEmailAndPassword(email, password),
+  createUserWithEmailAndPassword: (email: string, password: string) => FIREBASE_AUTH.createUserWithEmailAndPassword(email, password) 
 }
 
-export { deviceApp, deviceAuth, deviceDatabase, webApp, webAuth, getWebAuth }
+export { deviceApp, deviceAuth, webApp, webAuth, getWebAuth }

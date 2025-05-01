@@ -59,7 +59,7 @@ const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
   },
 });
 
-const RootStack = createNativeStackNavigator({
+const AuthRootStack = createNativeStackNavigator({
   screens: {
     HomeTabs: {
       screen: HomeTabs,
@@ -109,7 +109,91 @@ const RootStack = createNativeStackNavigator({
 },
 });
   
-export const Navigation = createStaticNavigation(RootStack);
+const NoneAuthRootStack = createNativeStackNavigator({
+  screens: {
+    Welcome: {
+      screen: Welcome,
+      options: {
+        headerShown: false,
+      },
+    },
+    Signin: {
+      screen: Signin,
+      options: {
+        headerShown: false,
+      },
+    },
+    Signup: {
+      screen: Signup,
+      options: {
+        headerShown: false,
+      },
+    },
+    NotFound: {
+      screen: NotFound,
+      options: {
+        title: '404',
+      },
+      linking: {
+        path: '*',
+      },
+    },
+  },
+});
+
+const RootStack = createNativeStackNavigator({
+  screens: {
+    HomeTabs: {
+      screen: HomeTabs,
+      options: {
+        headerShown: false,
+      },
+    },
+    Profile: { // Create a screen called Profile
+      screen: Profile,
+      options: {
+        headerShown: false,
+      },
+    },
+  Settings: { // Create a screen called Settings
+    screen: Settings,
+    options: {
+      headerShown: false,
+    },
+  },
+  NotFound: {
+    screen: NotFound,
+    options: {
+      title: '404',
+    },
+    linking: {
+      path: '*',
+    },
+  },
+  Welcome: {
+    screen: Welcome,
+    options: {
+      headerShown: false,
+    },
+  },
+  Signin: {
+    screen: Signin,
+    options: {
+      headerShown: false,
+    },
+  },
+  Signup: {
+    screen: Signup,
+    options: {
+      headerShown: false,
+    },
+  },
+},
+});
+
+export const AuthNavigation = createStaticNavigation(AuthRootStack);
+export const NoneAuthNavigation = createStaticNavigation(NoneAuthRootStack);
+export const RootNavigation = createStaticNavigation(RootStack);
 
 type RootStackParamList = StaticParamList<typeof RootStack>;
 

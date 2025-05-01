@@ -55,8 +55,12 @@ export function Signin() {
     const singIn = async () => {
         setLoading(true);
         try {
-            const response = Platform.OS === 'web' && webAuth ? await webAuth.signInWithEmailAndPassword(email, password) : deviceAuth ? await deviceAuth.signInWithEmailAndPassword(email, password) : undefined;
-            console.log(response);
+            if (Platform.OS === 'web') {
+                await webAuth?.signInWithEmailAndPassword(email, password);
+            } else {
+                await deviceAuth?.signInWithEmailAndPassword(email, password);
+            };
+            navigation.navigate('HomeTabs');
         } catch (error: any) {
             console.error(error);
             resetPassword();

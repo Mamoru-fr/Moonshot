@@ -26,5 +26,12 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 
-/my-app/node_modules/
-/my-app/src\config\firebaseConfigRequiere.ts
+my-app/node_modules/
+my-app/google-services.json
+my-app/.expo/
+my-app/src/config/firebaseConfig.ts
+my-app/src/config/firebaseConfigDevice.ts
+my-app/src/config/firebaseConfigWeb.ts
+my-app/android/app/google-services.json
+my-app/ios/myapp/GoogleService-Info.plist
+my-app/GoogleService-Info.plist

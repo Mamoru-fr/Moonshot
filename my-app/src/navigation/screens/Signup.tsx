@@ -62,8 +62,12 @@ export function Signup() {
         setLoading(true);
         pswd === confpswd && pswd != "" && confpswd != "" ? console.log('Passwords match') : alert('Passwords do not match!'), resetPassword(), setLoading(false);
         try {
-            const response = Platform.OS==='web' && webAuth ? await webAuth.createUserWithEmailAndPassword(email, password) : deviceAuth ? await deviceAuth.createUserWithEmailAndPassword(email, password) : undefined;
-            console.log(response);
+            if (Platform.OS === 'web') {
+                await webAuth?.createUserWithEmailAndPassword(email, password);
+            } else {
+                await deviceAuth?.createUserWithEmailAndPassword(email, password);
+            }
+            // Send email verification
             alert('Check your emails!');
         } catch (error: any) {
             console.error(error);
