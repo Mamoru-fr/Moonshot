@@ -35,6 +35,7 @@ export function Signup() {
         // Authentificator
             const [email, setEmail] = useState('');
             const [password, setPassword] = useState('')
+            const [confPassword, setConfPassword] = useState('')
             const [loading, setLoading] = useState(false)
         // Colors
             const colors = useThemeColors();
@@ -48,19 +49,16 @@ export function Signup() {
         const backArrow = (
             Platform.OS === 'ios' ? backArrowIOSB : Platform.OS === 'android' ? backArrowAndroidB : backArrowWebB
         ) 
-        
-    // Constants in function
-        const pswd: string = '';
-        const confpswd: string = '';
 
 
     const resetPassword = () => {
         setPassword('');
+        setConfPassword('');
     }
 
     const singUp = async () => {
         setLoading(true);
-        pswd === confpswd && pswd != "" && confpswd != "" ? console.log('Passwords match') : alert('Passwords do not match!'), resetPassword(), setLoading(false);
+        password === confPassword && password != "" && confPassword != "" ? console.log('Passwords match') : alert('Passwords do not match!'), resetPassword(), setLoading(false);
         try {
             if (Platform.OS === 'web') {
                 await webAuth?.createUserWithEmailAndPassword(email, password);
@@ -98,14 +96,14 @@ export function Signup() {
                         autoCompleteType='current-password'
                         textContentType='password'
                         value={password}
-                        onChange={(pswd) => pswd} />
+                        onChange={(pswd) => setPassword(pswd)} />
                     <InputBox style={[styles.inputBox, { marginBottom: 30 }]}
                         placeholder='Confirm Password'
                         security={true}
                         autoCompleteType='current-password'
                         textContentType='password'
-                        value={password}
-                        onChange={(confpswd) => confpswd} />
+                        value={confPassword}
+                        onChange={(confpswd) => setConfPassword(confpswd)} />
                     <Button style={styles.signinButton} onPress={singUp}>
                         <ThemedText variant='body1'>{t('Signup_SignupButton')}</ThemedText>
                     </Button>
