@@ -4,7 +4,7 @@
 node_modules/
 
 # Firebase
-src/config/firebaseConfig.ts
+src/config/
 
 # Expo
 .expo/
