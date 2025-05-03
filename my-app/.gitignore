@@ -4,11 +4,7 @@
 node_modules/
 
 # Firebase
-src\config\firebaseConfigWeb.ts
-src\config\firebaseConfig.ts
-src\config\firebaseConfigDevice.ts
-my-app/google-services.json
-my-app/GoogleService-Info.plist
+src/config/firebaseConfig.ts
 
 # Expo
 .expo/
