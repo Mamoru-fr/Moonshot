@@ -31,4 +31,3 @@ my-app/.expo/
 my-app/src/config/firebaseConfig.ts
 my-app/android/app/google-services.json
 my-app/ios/myapp/GoogleService-Info.plist
-.DS_Store
