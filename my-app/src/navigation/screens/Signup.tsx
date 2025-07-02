@@ -18,7 +18,7 @@
         import { getThemeColors, useThemeColors } from '../../hooks/useThemeColors';
     
     // Firebase
-        import { deviceAuth, webAuth } from '../../config/firebaseConfig'
+        import { deviceAuth, webAuth } from '../../config/firebase/firebaseConfig'
 
     // Navigation
         import { useNavigation } from '@react-navigation/native'

@@ -10,12 +10,12 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.plist",
-      "bundleIdentifier": "com.myapp"
+      "googleServicesFile": "./src/config/firebase/GoogleService-Info.plist",
+      "bundleIdentifier": "Moonshot"
     },
     "android": {
-      "googleServicesFile": "./google-services.json",
-      "package": "com.myapp",
+      "googleServicesFile": "./src/config/firebase/google-services.json",
+      "package": "com.moonshot.managementapplication",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
