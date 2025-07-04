@@ -1,6 +1,7 @@
 import { StyleSheet, View, ViewProps } from "react-native";
 import { Row } from "./Row";
 import { ThemedText } from "./ThemedText";
+import React from "react";
 
 type Props = ViewProps & {
     textInput: string,

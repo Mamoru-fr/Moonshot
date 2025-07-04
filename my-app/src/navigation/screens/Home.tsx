@@ -1,4 +1,7 @@
 // Imports
+  // Assets
+    import AMTLogo from '../../assets/AMTCGSGROUPE/LOGO AMTCGSGROUPE - FINAL.png'
+
   // Components
     import { Button } from '../../components/Button';
     import { RootView } from '../../components/RootView';
@@ -12,12 +15,13 @@
 
   // React & React Natives Components
     import React from 'react';
-    import { Platform, StyleSheet, Text } from 'react-native';
+    import { Image, Platform, StyleSheet, View } from 'react-native';
 
   // Translation
     import { useTranslation } from 'react-i18next';
+import { Header } from '../../components/header';
 
-export function Home() {
+export function Home() {  
   // Hooks in Function
     // Colors
       const theme = getThemeColors();
@@ -28,17 +32,14 @@ export function Home() {
       const { t } = useTranslation();
     
   return (
-    <RootView style={styles.container}>
-      <ThemedText variant='body1'>{t("homeScreen")}</ThemedText>
-      <ThemedText variant='body1'>{t("openApp")}</ThemedText>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        <Text>{t('goProfile')}</Text>
-      </Button>
-      <Button onPress={() => navigation.navigate('Settings')}>{t('goSettings')}</Button>
-      <Button onPress={() => navigation.navigate('Welcome')}>Welcome</Button>
-      <Button onPress={() => navigation.navigate('Signup')}>Sign up</Button>
-      <Button onPress={() => navigation.navigate('Signin')}>Sign in</Button>
-      <ThemedText variant='body1'>{t("description")}</ThemedText>
+    <RootView>
+      <Header></Header>
+      <View style={styles.container}>
+        <Image source={AMTLogo} style={styles.AMTLogo}/>
+        <ThemedText variant={ Platform.OS === 'web' ? 'headline2' : 'subtitle2'} style={styles.text}>{t("Welcome")}</ThemedText>
+        <Button>{t("WantBookRide")}</Button>
+        <Button>{t("WantBecomeDriver")}</Button>
+      </View>
     </RootView>
   );
 }
@@ -49,5 +50,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
-  }
+  },
+  AMTLogo: {
+    width: '70%',
+    height: "auto",
+    aspectRatio: '3424/2212',
+    maxWidth: 430,
+  },
+  text: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    textAlign: 'center',
+    width: "70%",
+    maxWidth: 500,
+    fontWeight: 'normal',
+  },
 });

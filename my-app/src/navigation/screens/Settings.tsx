@@ -48,8 +48,8 @@ export function Settings() {
   return (
     <RootView style={styles.wrapper}>
       <Modal visible={visible} onRequestClose={() => setVisible(true)} animationType="slide">
-        <View style={[styles.languageList, { backgroundColor: colors.purpleSoft }]}>
-          <View style={[styles.languageListHeader, { backgroundColor: colors.purplePastel }]}>
+        <View style={[styles.languageList, { backgroundColor: colors.blueSoft }]}>
+          <View style={[styles.languageListHeader, { backgroundColor: colors.bluePastel }]}>
             <ThemedText variant='headline2'>{t("selectLanguage")}</ThemedText>
           </View>
           <FlatList

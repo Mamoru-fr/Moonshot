@@ -1,10 +1,8 @@
 // Imports
   // Assets
     // Icons
-      import bell from '../assets/icons/bell.png';
-      import newspaper from '../assets/icons/newspaper.png';
-  // Firebase
-    import { User } from '@firebase/auth'
+      import home from '../assets/icons/home.png'
+      import profile from '../assets/icons/profile.png'
   // Navigation
     import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
     import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
@@ -15,12 +13,10 @@
   // Screens
     import { Home } from './screens/Home';
     import { Profile } from './screens/Profile';
-    import { Settings } from './screens/Settings';
-    import { Updates } from './screens/Updates';
     import { NotFound } from './screens/NotFound';
-    import { Welcome } from './screens/Welcome';
     import { Signin } from './screens/Signin';
     import { Signup } from './screens/Signup';
+import { Settings } from './screens/Settings';
 
 const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
   screens: {
@@ -29,7 +25,7 @@ const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
       options: {
         tabBarIcon: ({ color, size }) => (
           <Image
-            source={newspaper}
+            source={home}
             tintColor={color}
             style={{
               width: size,
@@ -37,105 +33,23 @@ const HomeTabs = createBottomTabNavigator({ // Create a bottom tab navigator
             }}
           />
         ),
-        headerShown: false,
-      },
-    },
-    Updates: { // Create a screen called Updates
-      screen: Updates,
-      options: {
-        tabBarIcon: ({ color, size }) => (
-          <Image
-            source={bell}
-            tintColor={color}
-            style={{
-              width: size,
-              height: size,
-            }}
-          />
-        ),
-        headerShown: false,
-      },
-    },
-  },
-});
-
-const AuthRootStack = createNativeStackNavigator({
-  screens: {
-    HomeTabs: {
-      screen: HomeTabs,
-      options: {
         headerShown: false,
       },
     },
     Profile: { // Create a screen called Profile
       screen: Profile,
       options: {
+        tabBarIcon: ({ color, size }) => (
+          <Image
+          source={profile}
+          tintColor={color}
+          style={{
+            width: size,
+            height: size,
+          }}
+          />
+        ),
         headerShown: false,
-      },
-    },
-  Settings: { // Create a screen called Settings
-    screen: Settings,
-    options: {
-      headerShown: false,
-    },
-  },
-  NotFound: {
-    screen: NotFound,
-    options: {
-      title: '404',
-    },
-    linking: {
-      path: '*',
-    },
-  },
-  Welcome: {
-    screen: Welcome,
-    options: {
-      headerShown: false,
-    },
-  },
-  Signin: {
-    screen: Signin,
-    options: {
-      headerShown: false,
-    },
-  },
-  Signup: {
-    screen: Signup,
-    options: {
-      headerShown: false,
-    },
-  },
-},
-});
-  
-const NoneAuthRootStack = createNativeStackNavigator({
-  screens: {
-    Welcome: {
-      screen: Welcome,
-      options: {
-        headerShown: false,
-      },
-    },
-    Signin: {
-      screen: Signin,
-      options: {
-        headerShown: false,
-      },
-    },
-    Signup: {
-      screen: Signup,
-      options: {
-        headerShown: false,
-      },
-    },
-    NotFound: {
-      screen: NotFound,
-      options: {
-        title: '404',
-      },
-      linking: {
-        path: '*',
       },
     },
   },
@@ -149,18 +63,6 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
-    Profile: { // Create a screen called Profile
-      screen: Profile,
-      options: {
-        headerShown: false,
-      },
-    },
-  Settings: { // Create a screen called Settings
-    screen: Settings,
-    options: {
-      headerShown: false,
-    },
-  },
   NotFound: {
     screen: NotFound,
     options: {
@@ -168,12 +70,6 @@ const RootStack = createNativeStackNavigator({
     },
     linking: {
       path: '*',
-    },
-  },
-  Welcome: {
-    screen: Welcome,
-    options: {
-      headerShown: false,
     },
   },
   Signin: {
@@ -188,11 +84,15 @@ const RootStack = createNativeStackNavigator({
       headerShown: false,
     },
   },
+  Settings: {
+    screen: Settings,
+    options: {
+      headerShown: false,
+    },
+  }
 },
 });
 
-export const AuthNavigation = createStaticNavigation(AuthRootStack);
-export const NoneAuthNavigation = createStaticNavigation(NoneAuthRootStack);
 export const RootNavigation = createStaticNavigation(RootStack);
 
 type RootStackParamList = StaticParamList<typeof RootStack>;

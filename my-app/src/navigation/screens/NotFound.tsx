@@ -2,9 +2,11 @@
   import React from 'react'
 
   // React & React Native Components
-    import { Text, Button } from '@react-navigation/elements';
+    import { Text } from '@react-navigation/elements';
     import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Button } from '../../components/Button';
+import { useTranslation } from 'react-i18next';
 
   // Navigations 
 
@@ -12,10 +14,11 @@ import { useNavigation } from '@react-navigation/native';
 
 export function NotFound() {
   const navigation = useNavigation()
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <Text>404</Text>
-      <Button>Go to Home</Button>
+      <Button onPress={() => navigation.navigate("HomeTabs")}> {t("goToHomePage")} </Button>
     </View>
   );
 }

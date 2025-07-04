@@ -2,6 +2,7 @@ import { Image, StyleSheet } from "react-native"
 import { useThemeColors } from "../hooks/useThemeColors"
 import { Row } from "./Row"
 import { TextInput } from "react-native-gesture-handler";
+import React from "react";
 
 type Props = {
     value: string, // The current value of the search bar

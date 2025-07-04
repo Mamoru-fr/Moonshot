@@ -23,7 +23,7 @@ export function Button({ onPress, style, color, image, imageSizeHeight, imageSiz
         <Pressable
             onPress={onPress}
             style={[styles.ButtonStyle, {
-                backgroundColor: color ? color : colors.purpleSoft 
+                backgroundColor: color ? color : colors.blueSoft 
             }, style
             ]}>
             <Row style={styles.ButtonRow}>
